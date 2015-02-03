@@ -1,28 +1,22 @@
 /**
- * Suppose a sorted array is rotated at some pivot unknown to you beforehand.
+ * Follow up for "Search in Rotated Sorted Array":
+ * What if duplicates are allowed?
  * 
- * (i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
+ * Would this affect the run-time complexity? How and why?
  * 
- * You are given a target value to search. If found in the array return its
- * index, otherwise return -1.
- * 
- * You may assume no duplicate exists in the array.
+ * Write a function to determine if a given target is in the array.
  * 
  * Tags: Array, Binary Search
  */
 
  public class Solution {
  	public static void main(String[] args) {
-
+ 	
  	}
 
- 	/**
- 	 * Binary search
- 	 */
- 	 
- 	public int search(int[] A, int target) {
+ 	public boolean search(int[] A, int target) {
  		if (A == null || A.length == 0) {
- 			return -1;
+ 			return false;
  		}
  		int start = 0;
  		int end = A.length - 1;
@@ -30,7 +24,7 @@
  		while (start + 1 < end) {
  			mid = start + (end - start) / 2;
  			if (A[mid] == target) {
- 				return mid;
+ 				return true;
  			} else if (A[start] < A[mid]) {
  				if (A[start] <= target && target < A[mid]) {
  					end = mid;
@@ -43,14 +37,16 @@
  				} else {
  					end = mid;
  				}
+ 			} else {
+ 				start++;
  			}
  		}
  		if (A[start] == target) {
- 			return start;
+ 			return true;
  		} else if (A[end] == target) {
- 			return end;
+ 			return true;
  		} else {
- 			return -1;
+ 			return false;
  		}
  	}
  }
